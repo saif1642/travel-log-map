@@ -11,13 +11,19 @@ const logs = require('./api/logs');
 const app = express();
 
 
-mongoose.createConnection(process.env.DATABASE_URL,{ useNewUrlParser:true });
+mongoose.connect(process.env.DATABASE_URL,
+    { 
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+    }
+);
 
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
     origin:process.env.CORS_ORIGIN
 }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json({

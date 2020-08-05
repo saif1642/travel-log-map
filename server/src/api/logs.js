@@ -11,10 +11,12 @@ router.get('/', async (req, res, next) => {
     }catch(err){
         next(err);
     }
+   
 })
 
 router.post('/', async (req, res, next) => {
     try{
+        console.log(req.body);
         const logEntry = new LogEntry(req.body);
         const createdLogEntry = await logEntry.save();
         res.json(createdLogEntry)
