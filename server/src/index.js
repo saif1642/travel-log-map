@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const middleweres = require('./middleware');
+const logs = require('./api/logs');
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.get('/', (req, res) => {
         message:"Hello World"
     })
 })
+
+app.use('/api/logs',logs);
 
 app.use(middleweres.notFound);
 app.use(middleweres.errorHandaler);
